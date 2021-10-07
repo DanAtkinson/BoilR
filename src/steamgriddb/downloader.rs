@@ -3,6 +3,7 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::{collections::HashMap, path::Path};
 
+use futures::stream::Filter;
 use futures::{stream, StreamExt}; // 0.3.1
 use std::error::Error;
 
@@ -96,10 +97,25 @@ async fn search_fo_to_download<'b>(
         return Ok(vec![]);
     }
     let mut search_results = HashMap::new();
-    for s in shortcuts_to_search_for {
-        let search = search.search(s.app_id, &s.app_name).await?;
-        if let Some(search) = search {
-            search_results.insert(s.app_id, search);
+    let search_results_a = stream::iter(shortcuts_to_search_for)
+        .map(|s| async move {
+            let search_result = search.search(s.app_id, &s.app_name).await;
+            if search_result.is_err() {
+                return None;
+            }
+            let search_result = search_result.unwrap();
+            if search_result.is_none() {
+                return None;
+            }
+            let search_result = search_result.unwrap();
+            Some((s.app_id, search_result))
+        })
+        .buffer_unordered(CONCURRENT_REQUESTS)
+        .collect::<Vec<Option<(u32, usize)>>>()
+        .await;
+    for r in search_results_a {
+        if let Some((app_id, search)) = r {
+            search_results.insert(app_id, search);
         }
     }
     let types = vec![ImageType::Logo, ImageType::Hero, ImageType::Grid];
