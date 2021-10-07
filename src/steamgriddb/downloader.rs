@@ -3,7 +3,6 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::{collections::HashMap, path::Path};
 
-use futures::stream::Filter;
 use futures::{stream, StreamExt}; // 0.3.1
 use std::error::Error;
 
@@ -81,7 +80,7 @@ async fn search_fo_to_download<'b>(
     known_images: Vec<String>,
     user_data_folder: &str,
     shortcuts: &Vec<ShortcutOwned>,
-    search: &mut CachedSearch<'b>,
+    search: &CachedSearch<'b>,
     client: &Client,
 ) -> Result<Vec<ToDownload>, Box<dyn Error>> {
     let shortcuts_to_search_for = shortcuts.iter().filter(|s| {
