@@ -1,5 +1,5 @@
 use failure::*;
-use std::path::{Path, PathBuf};
+use std::{fs::DirEntry, path::{Path, PathBuf}};
 
 use crate::{gog::gog_config::GogConfig, platform::Platform};
 
@@ -48,94 +48,12 @@ impl Platform<GogShortcut, GogErrors> for GogPlatform {
             install_locations
         };
 
-        let mut game_folders = vec![];
-        for install_location in install_locations {
-            let path = Path::new(&install_location);
-            if path.exists() {
-                let dirs = path.read_dir();
-                if let Ok(dirs) = dirs {
-                    for dir in dirs.flatten() {
-                        if let Ok(file_type) = dir.file_type() {
-                            if file_type.is_dir() {
-                                game_folders.push(dir.path());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        let mut games = vec![];
-        for game_folder in &game_folders {
-            if let Ok(files) = game_folder.read_dir() {
-                for file in files.flatten() {
-                    if let Some(file_name) = file.file_name().to_str() {
-                        if file_name.starts_with("goggame-") {
-                            if let Some(extension) = file.path().extension() {
-                                if let Some(extension) = extension.to_str() {
-                                    if extension == "info" {
-                                        // Finally we know we can parse this as a game
-                                        if let Ok(content) = std::fs::read_to_string(file.path()) {
-                                            if let Ok(gog_game) =
-                                                serde_json::from_str::<GogGame>(&content)
-                                            {
-                                                games.push((gog_game, game_folder));
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        let game_folders = get_all_sub_folders(install_locations); 
+        let games =  game_folders.iter().flat_map(|folder| find_game_info(folder));
 
-        let mut shortcuts = vec![];
-        for (game, game_folder) in games {
-            if let Some(folder_path) = game_folder.to_str() {
-                if let Some(tasks) = &game.play_tasks {
-                    if let Some(primary_task) = tasks.iter().find(|t| {
-                        t.is_primary.unwrap_or_default()
-                            && t.task_type == "FileTask"
-                            && t.category.as_ref().unwrap_or(&String::from("")) == "game"
-                    }) {
-                        if let Some(task_path) = &primary_task.path {
-                            let full_path = game_folder.join(&task_path);
-                            if let Some(full_path) = full_path.to_str() {
-                                let folder_path = folder_path.to_string();
 
-                                let working_dir = match &primary_task.working_dir {
-                                    Some(working_dir) => game_folder
-                                        .join(working_dir)
-                                        .to_str()
-                                        .unwrap_or_else(|| folder_path.as_str())
-                                        .to_string(),
-                                    None => folder_path.to_string(),
-                                };
 
-                                #[cfg(target_os = "linux")]
-                                let working_dir = working_dir.replace("\\", "/");
-
-                                let full_path_string = full_path.to_string();
-
-                                #[cfg(target_os = "linux")]
-                                let full_path_string = full_path_string.replace("\\", "/");
-
-                                let shortcut = GogShortcut {
-                                    name: game.name,
-                                    game_folder: folder_path,
-                                    working_dir,
-                                    game_id: game.game_id,
-                                    path: full_path_string,
-                                };
-                                shortcuts.push(shortcut);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        let shortcuts = games.filter_map(|(game,game_folder)| gog_game_to_shortcut(game,game_folder)).collect();
         Ok(shortcuts)
     }
 
@@ -149,6 +67,112 @@ impl Platform<GogShortcut, GogErrors> for GogPlatform {
     }
 }
 
+
+fn gog_game_to_shortcut(game:GogGame, game_folder:&Path) -> Option<GogShortcut>{
+    if let Some(folder_path) = game_folder.to_str() {
+        if let Some(primary_task) = game.get_primary_task() {
+            if let Some(task_path) = &primary_task.path {
+                let full_path = game_folder.join(&task_path);
+                if let Some(full_path) = full_path.to_str() {
+                    let folder_path = folder_path.to_string();
+
+                    let working_dir = match &primary_task.working_dir {
+                        Some(working_dir) => game_folder
+                            .join(working_dir)
+                            .to_str()
+                            .unwrap_or_else(|| folder_path.as_str())
+                            .to_string(),
+                        None => folder_path.to_string(),
+                    };
+
+                    #[cfg(target_os = "linux")]
+                    let working_dir = working_dir.replace("\\", "/");
+
+                    let full_path_string = full_path.to_string();
+
+                    #[cfg(target_os = "linux")]
+                    let full_path_string = full_path_string.replace("\\", "/");
+
+                    let shortcut = GogShortcut {
+                        name: game.name,
+                        game_folder: folder_path,
+                        working_dir,
+                        game_id: game.game_id,
+                        path: full_path_string,
+                    };
+                    return Some(shortcut);
+                }
+            }
+        }
+    }
+    None
+}
+
+fn starts_with(dir_entry: &DirEntry, starts_with:&str) -> bool{
+    if let Some(file_name) = dir_entry.file_name().to_str() {
+        file_name.starts_with(starts_with)
+    }else{
+        false
+    }
+}
+
+fn has_extension(dir_entry: &DirEntry, condition:&str) -> bool {
+    if let Some(extension) = dir_entry.path().extension() {
+        if let Some(extension) = extension.to_str() {
+            if extension == condition {
+                return true
+            }
+        }
+    }
+    false
+}
+
+
+fn parse_gog_game(path:PathBuf) -> Option<GogGame> {
+    if let Ok(content) = std::fs::read_to_string(path) {
+        if let Ok(gog_game) =
+            serde_json::from_str::<GogGame>(&content)
+            {
+                return  Some(gog_game);
+            }
+    }
+    None
+}
+
+
+
+///Get GogGame information from the given folder
+fn find_game_info(game_folder:&Path) -> Vec<(GogGame,&Path)> {
+    if let Ok(files) = game_folder.read_dir() {
+        files.flatten()
+            .filter(|file| starts_with(file, "goggame-"))
+            .filter(|file| has_extension(file, "info"))
+            .map(|file| file.path())
+            .filter_map(parse_gog_game)
+            .map(|game| (game,game_folder)) 
+            .collect()
+    }else{
+        vec![]
+    }
+}
+
+/// Get all the subfolders in one folder, and return them as paths
+fn get_all_sub_folders(install_locations:Vec<String>) -> Vec<PathBuf> {
+    install_locations.iter()
+        .filter_map(|install_location| Path::new(&install_location).read_dir().ok())
+        .flatten() // get all subfolders from all install locations
+        .filter_map(|dir| dir.ok())
+        .filter_map(|dir|{
+                if let Ok(file_type) = dir.file_type() {
+                        if file_type.is_dir() {
+                           return Some(dir.path())
+                        }
+                    }
+                None
+        }).collect()
+}
+
+    
 #[cfg(target_os = "linux")]
 fn fix_paths(wine_c_drive: &str, paths: Vec<String>) -> Vec<String> {
     paths

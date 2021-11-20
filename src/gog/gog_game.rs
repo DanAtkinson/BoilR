@@ -12,6 +12,18 @@ pub(crate) struct GogGame {
     pub play_tasks: Option<Vec<PlayTask>>,
 }
 
+
+impl GogGame{
+    pub(crate) fn get_primary_task(&self) -> Option<&PlayTask>{
+        match &self.play_tasks{
+            Some(tasks) => {
+                tasks.iter().find(|t| t.is_file_task())
+            },
+            None => None
+        }
+    }
+}
+
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub(crate) struct PlayTask {
     pub category: Option<String>,
@@ -24,6 +36,15 @@ pub(crate) struct PlayTask {
     #[serde(alias = "workingDir")]
     pub working_dir: Option<String>,    
 
+}
+
+
+impl PlayTask{
+    pub(crate) fn is_file_task(&self) -> bool {
+        self.is_primary.unwrap_or_default()
+            && self.task_type == "FileTask"
+            && self.category.as_ref().unwrap_or(&String::from("")) == "game"
+    }
 }
 
 pub(crate) struct GogShortcut {
