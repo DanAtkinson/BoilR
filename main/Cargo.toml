@@ -1,0 +1,33 @@
+[package]
+name = "boilr"
+version = "0.2.7"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dependencies]
+steam_shortcuts_util = "^1.1.4"
+steamgriddb_api = "^0.2,0"
+serde = { version = "^1.0.130", features = ["derive"] }
+serde_json = "^1.0.68"
+tokio = { version = "^1.11.0", features = ["full"] }
+reqwest = { version = "^0.11.4", default_features = false }
+config = "^0.11.0"
+failure = "^0.1.8"
+#https://fltk-rs.github.io/fltk-rs/
+fltk = { version = "^1.2", features = ["fltk-bundled"], optional = true }
+nom = "^7.0.*"
+nom_locate = "^3.0.*"
+flate2 = "^1.0.22"
+toml = { version = "^0.5.8", optional = true }
+futures = { version = "^0.3.17" }
+dashmap = { version = "^4.0.2", features = ["serde"] }
+
+[build-dependencies]
+fl2rust = { version = "0.4", optional = true }
+
+[features]
+# default = ["ui"]
+ui = ["fltk", "fl2rust", "toml"]
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.10.1"
