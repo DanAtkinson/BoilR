@@ -3,6 +3,7 @@ members=[
     "main",
     "platform",
     "egs",
+    "origin",
     "gog",
     "itch",
     "legendary",

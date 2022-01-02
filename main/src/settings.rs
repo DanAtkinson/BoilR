@@ -1,7 +1,8 @@
 use crate::{
-     origin::OriginSettings, steam::SteamSettings,
+     steam::SteamSettings,
     steamgriddb::SteamGridDbSettings,
 };
+use origin::OriginSettings;
 use legendary::LegendarySettings;
 use egs::EpicGamesLauncherSettings;
 use gog::GogSettings;

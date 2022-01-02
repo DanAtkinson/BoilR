@@ -1,3 +1,3 @@
 mod platform;
 
-pub use platform::*;
+pub use self::platform::*;

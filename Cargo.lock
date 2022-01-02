@@ -92,14 +92,12 @@ dependencies = [
  "egs",
  "failure",
  "fl2rust",
- "flate2",
  "fltk",
  "futures",
  "gog",
  "itch",
  "legendary",
- "nom 7.1.0",
- "nom_locate",
+ "origin",
  "platform",
  "reqwest",
  "serde 1.0.133",
@@ -109,7 +107,6 @@ dependencies = [
  "tokio",
  "toml",
  "uplay",
- "winreg 0.10.1",
 ]
 
 [[package]]
@@ -893,6 +890,17 @@ dependencies = [
  "libc",
  "pkg-config",
  "vcpkg",
+]
+
+[[package]]
+name = "origin"
+version = "0.1.0"
+dependencies = [
+ "failure",
+ "nom 7.1.0",
+ "platform",
+ "serde 1.0.133",
+ "steam_shortcuts_util",
 ]
 
 [[package]]

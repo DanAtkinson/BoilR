@@ -1,4 +1,3 @@
-mod origin;
 mod settings;
 mod steam;
 mod steamgriddb;

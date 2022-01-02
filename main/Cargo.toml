@@ -15,13 +15,9 @@ config = "^0.11.0"
 failure = "^0.1.8"
 #https://fltk-rs.github.io/fltk-rs/
 fltk = { version = "^1.2", features = ["fltk-bundled"], optional = true }
-nom = "^7.0.*"
-nom_locate = "^3.0.*"
-flate2 = "^1.0.22"
 toml = { version = "^0.5.8", optional = true }
 futures = { version = "^0.3.17" }
 dashmap = { version = "^4.0.2", features = ["serde"] }
-
 
 platform = {path = "../platform"}
 
@@ -30,6 +26,7 @@ gog = {path = "../gog"}
 itch = {path = "../itch"}
 uplay = {path = "../uplay"}
 legendary = {path = "../legendary"}
+origin = {path = "../origin"}
 
 [build-dependencies]
 fl2rust = { version = "0.4", optional = true }
@@ -37,6 +34,3 @@ fl2rust = { version = "0.4", optional = true }
 [features]
 # default = ["ui"]
 ui = ["fltk", "fl2rust", "toml"]
-
-[target.'cfg(windows)'.dependencies]
-winreg = "0.10.1"
