@@ -3,5 +3,6 @@ members=[
     "main",
     "platform",
     "egs",
-    "gog"
+    "gog",
+    "itch"
 ]

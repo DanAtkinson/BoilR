@@ -10,7 +10,8 @@ use platform::Platform;
 use std::error::Error;
 use steam_shortcuts_util::{shortcut::ShortcutOwned, shortcuts_to_bytes};
 use gog::GogPlatform;
-use crate::{itch::ItchPlatform, origin::OriginPlatform};
+use itch::ItchPlatform;
+use crate::{origin::OriginPlatform};
 use std::{fs::File, io::Write, path::Path};
 
 const BOILR_TAG: &str = "boilr";

@@ -1,4 +1,3 @@
-mod itch;
 mod legendary;
 mod origin;
 mod settings;

@@ -96,6 +96,7 @@ dependencies = [
  "fltk",
  "futures",
  "gog",
+ "itch",
  "nom 7.1.0",
  "nom_locate",
  "platform",
@@ -596,6 +597,19 @@ name = "ipnet"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "68f2d64f2edebec4ce84ad108148e67e1064789bee435edc5b60ad398714a3a9"
+
+[[package]]
+name = "itch"
+version = "0.1.0"
+dependencies = [
+ "failure",
+ "flate2",
+ "nom 7.1.0",
+ "platform",
+ "serde 1.0.133",
+ "serde_json",
+ "steam_shortcuts_util",
+]
 
 [[package]]
 name = "itoa"
