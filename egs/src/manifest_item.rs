@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use steam_shortcuts_util::{shortcut::ShortcutOwned, Shortcut};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub(crate) struct ManifestItem {
+pub struct ManifestItem {
     #[serde(alias = "LaunchExecutable")]
     pub launch_executable: String,
 

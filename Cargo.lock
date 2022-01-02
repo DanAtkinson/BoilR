@@ -89,6 +89,7 @@ version = "0.2.7"
 dependencies = [
  "config",
  "dashmap",
+ "egs",
  "failure",
  "fl2rust",
  "flate2",
@@ -96,6 +97,7 @@ dependencies = [
  "futures",
  "nom 7.1.0",
  "nom_locate",
+ "platform",
  "reqwest",
  "serde 1.0.133",
  "serde_json",
@@ -215,6 +217,18 @@ dependencies = [
  "cfg-if",
  "num_cpus",
  "serde 1.0.133",
+]
+
+[[package]]
+name = "egs"
+version = "0.1.0"
+dependencies = [
+ "failure",
+ "platform",
+ "serde 1.0.133",
+ "serde_json",
+ "steam_shortcuts_util",
+ "winreg 0.10.1",
 ]
 
 [[package]]
@@ -897,6 +911,13 @@ name = "pkg-config"
 version = "0.3.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "58893f751c9b0412871a09abd62ecd2a00298c6c83befa223ef98c52aef40cbe"
+
+[[package]]
+name = "platform"
+version = "0.1.0"
+dependencies = [
+ "steam_shortcuts_util",
+]
 
 [[package]]
 name = "ppv-lite86"

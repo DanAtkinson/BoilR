@@ -1,15 +1,14 @@
-use steam_shortcuts_util::{shortcut::ShortcutOwned, shortcuts_to_bytes};
-
-use crate::{
-    egs::EpicPlatform,
+use egs::EpicPlatform;
+use crate::{    
     legendary::LegendaryPlatform,
-    platform::Platform,
     settings::Settings,
     steam::{get_shortcuts_for_user, get_shortcuts_paths, ShortcutInfo, SteamUsersInfo},
     steamgriddb::download_images_for_users,
     uplay::Uplay,
 };
+use platform::Platform;
 use std::error::Error;
+use steam_shortcuts_util::{shortcut::ShortcutOwned, shortcuts_to_bytes};
 
 use crate::{gog::GogPlatform, itch::ItchPlatform, origin::OriginPlatform};
 use std::{fs::File, io::Write, path::Path};
@@ -147,7 +146,7 @@ where
     T: Into<ShortcutOwned>,
 {
     if platform.enabled() {
-        if let crate::platform::SettingsValidity::Invalid { reason } = platform.settings_valid() {
+        if let platform::SettingsValidity::Invalid { reason } = platform.settings_valid() {
             eprintln!(
                 "Setting for platform {} are invalid, reason: {}",
                 platform.name(),

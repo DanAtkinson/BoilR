@@ -1,9 +1,7 @@
-mod egs;
 mod gog;
 mod itch;
 mod legendary;
 mod origin;
-mod platform;
 mod settings;
 mod steam;
 mod steamgriddb;

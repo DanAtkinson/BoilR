@@ -1,4 +1,4 @@
-use crate::platform::{Platform, SettingsValidity};
+use platform::{Platform, SettingsValidity};
 use failure::*;
 use nom::bytes::complete::take_until;
 use std::{
@@ -66,7 +66,7 @@ impl Platform<OriginGame, OriginErrors> for OriginPlatform {
         Ok(games.collect())
     }
 
-    fn settings_valid(&self) -> crate::platform::SettingsValidity {
+    fn settings_valid(&self) -> platform::SettingsValidity {
         let shortcuts_res = self.get_shortcuts();
         match shortcuts_res {
             Ok(_) => SettingsValidity::Valid,

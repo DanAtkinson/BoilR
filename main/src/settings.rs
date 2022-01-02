@@ -1,5 +1,6 @@
+use egs::EpicGamesLauncherSettings;
 use crate::{
-    egs::EpicGamesLauncherSettings, gog::GogSettings, itch::ItchSettings,
+    gog::GogSettings, itch::ItchSettings,
     legendary::LegendarySettings, origin::OriginSettings, steam::SteamSettings,
     steamgriddb::SteamGridDbSettings, uplay::UplaySettings,
 };

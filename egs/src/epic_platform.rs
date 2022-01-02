@@ -1,4 +1,4 @@
-use crate::platform::{Platform, SettingsValidity};
+use platform::{Platform, SettingsValidity};
 
 use super::{
     get_egs_manifests, get_manifests::EpicGamesManifestsError, EpicGamesLauncherSettings,
@@ -6,7 +6,7 @@ use super::{
 };
 
 pub struct EpicPlatform {
-    settings: EpicGamesLauncherSettings,
+    pub settings: EpicGamesLauncherSettings,
 }
 
 impl EpicPlatform {

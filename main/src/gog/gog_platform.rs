@@ -1,7 +1,8 @@
 use failure::*;
 use std::path::{Path, PathBuf};
 
-use crate::{gog::gog_config::GogConfig, platform::Platform};
+use crate::{gog::gog_config::GogConfig };
+use platform::Platform;
 
 use super::{
     gog_game::{GogGame, GogShortcut},
@@ -139,8 +140,8 @@ impl Platform<GogShortcut, GogErrors> for GogPlatform {
         Ok(shortcuts)
     }
 
-    fn settings_valid(&self) -> crate::platform::SettingsValidity {
-        use crate::platform::*;
+    fn settings_valid(&self) -> platform::SettingsValidity {
+        use platform::*;
         let shortcuts_res = self.get_shortcuts();
         match shortcuts_res {
             Ok(_) => SettingsValidity::Valid,

@@ -1,4 +1,4 @@
-use crate::platform::Platform;
+use platform::Platform;
 use std::error::Error;
 
 use super::{game::Game, settings::UplaySettings};
@@ -23,8 +23,8 @@ impl Platform<Game, Box<dyn Error>> for Uplay {
         "Uplay"
     }
 
-    fn settings_valid(&self) -> crate::platform::SettingsValidity {
-        crate::platform::SettingsValidity::Valid
+    fn settings_valid(&self) -> platform::SettingsValidity {
+        platform::SettingsValidity::Valid
     }
 
     fn get_shortcuts(&self) -> Result<Vec<Game>, Box<dyn Error>> {
