@@ -1,10 +1,9 @@
 use egs::EpicPlatform;
-use crate::{    
-    legendary::LegendaryPlatform,
+use legendary::LegendaryPlatform;
+use crate::{        
     settings::Settings,
     steam::{get_shortcuts_for_user, get_shortcuts_paths, ShortcutInfo, SteamUsersInfo},
     steamgriddb::download_images_for_users,
-    
 };
 use uplay::Uplay;
 use platform::Platform;

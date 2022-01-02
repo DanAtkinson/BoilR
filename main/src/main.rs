@@ -1,4 +1,3 @@
-mod legendary;
 mod origin;
 mod settings;
 mod steam;

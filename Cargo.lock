@@ -97,6 +97,7 @@ dependencies = [
  "futures",
  "gog",
  "itch",
+ "legendary",
  "nom 7.1.0",
  "nom_locate",
  "platform",
@@ -638,6 +639,16 @@ name = "lazy_static"
 version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
+
+[[package]]
+name = "legendary"
+version = "0.1.0"
+dependencies = [
+ "platform",
+ "serde 1.0.133",
+ "serde_json",
+ "steam_shortcuts_util",
+]
 
 [[package]]
 name = "lexical-core"
