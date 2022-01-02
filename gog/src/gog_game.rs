@@ -25,7 +25,7 @@ pub(crate) struct PlayTask {
     pub working_dir: Option<String>,
 }
 
-pub(crate) struct GogShortcut {
+pub struct GogShortcut {
     pub name: String,
     pub game_folder: String,
     pub path: String,

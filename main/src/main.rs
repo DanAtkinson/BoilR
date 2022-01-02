@@ -1,4 +1,3 @@
-mod gog;
 mod itch;
 mod legendary;
 mod origin;

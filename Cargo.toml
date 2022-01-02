@@ -2,5 +2,6 @@
 members=[
     "main",
     "platform",
-    "egs"
+    "egs",
+    "gog"
 ]
