@@ -1,10 +1,11 @@
+use crate::{
+    legendary::LegendarySettings, origin::OriginSettings, steam::SteamSettings,
+    steamgriddb::SteamGridDbSettings,
+};
 use egs::EpicGamesLauncherSettings;
 use gog::GogSettings;
 use itch::ItchSettings;
-use crate::{    
-    legendary::LegendarySettings, origin::OriginSettings, steam::SteamSettings,
-    steamgriddb::SteamGridDbSettings, uplay::UplaySettings,
-};
+use uplay::UplaySettings;
 
 use config::{Config, ConfigError, Environment, File};
 use serde::{Deserialize, Serialize};

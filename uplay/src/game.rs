@@ -1,9 +1,9 @@
 use steam_shortcuts_util::shortcut::{Shortcut, ShortcutOwned};
 
-pub(crate) struct Game {
-    pub(crate) name: String,
-    pub(crate) icon: String,
-    pub(crate) id: String,
+pub struct Game {
+    pub name: String,
+    pub icon: String,
+    pub id: String,
 }
 
 impl From<Game> for ShortcutOwned {

@@ -28,6 +28,7 @@ platform = {path = "../platform"}
 egs = {path = "../egs"}
 gog = {path = "../gog"}
 itch = {path = "../itch"}
+uplay = {path = "../uplay"}
 
 [build-dependencies]
 fl2rust = { version = "0.4", optional = true }

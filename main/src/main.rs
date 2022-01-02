@@ -4,7 +4,6 @@ mod settings;
 mod steam;
 mod steamgriddb;
 mod sync;
-mod uplay;
 
 #[cfg(feature = "ui")]
 mod ui;

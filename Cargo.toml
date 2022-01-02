@@ -4,5 +4,6 @@ members=[
     "platform",
     "egs",
     "gog",
-    "itch"
+    "itch",
+    "uplay"
 ]
