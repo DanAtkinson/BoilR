@@ -7,5 +7,7 @@ members=[
     "gog",
     "itch",
     "legendary",
-    "uplay"
+    "uplay",
+    "ui",
+    "cli"
 ]
