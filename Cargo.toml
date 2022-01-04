@@ -11,3 +11,4 @@ members=[
     "cli",
     "ui"
 ]
+default-members=["cli"]

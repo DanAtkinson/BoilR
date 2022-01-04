@@ -13,9 +13,6 @@ tokio = { version = "^1.11.0", features = ["full"] }
 reqwest = { version = "^0.11.4", default_features = false }
 config = "^0.11.0"
 failure = "^0.1.8"
-#https://fltk-rs.github.io/fltk-rs/
-fltk = { version = "^1.2", features = ["fltk-bundled"], optional = true }
-toml = { version = "^0.5.8", optional = true }
 futures = { version = "^0.3.17" }
 dashmap = { version = "^4.0.2", features = ["serde"] }
 
@@ -27,10 +24,3 @@ itch = {path = "../itch"}
 uplay = {path = "../uplay"}
 legendary = {path = "../legendary"}
 origin = {path = "../origin"}
-
-[build-dependencies]
-fl2rust = { version = "0.4", optional = true }
-
-[features]
-# default = ["ui"]
-ui = ["fltk", "fl2rust", "toml"]

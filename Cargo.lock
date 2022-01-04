@@ -680,8 +680,6 @@ dependencies = [
  "dashmap",
  "egs",
  "failure",
- "fl2rust",
- "fltk",
  "futures",
  "gog",
  "itch",
@@ -694,7 +692,6 @@ dependencies = [
  "steam_shortcuts_util",
  "steamgriddb_api",
  "tokio",
- "toml",
  "uplay",
 ]
 
@@ -1449,10 +1446,7 @@ checksum = "59547bce71d9c38b83d9c0e92b6066c4253371f15005def0c30d9657f50c7642"
 name = "ui"
 version = "0.2.7"
 dependencies = [
- "config",
- "dashmap",
  "egs",
- "failure",
  "fl2rust",
  "fltk",
  "futures",
@@ -1461,12 +1455,6 @@ dependencies = [
  "legendary",
  "main",
  "origin",
- "platform",
- "reqwest",
- "serde 1.0.133",
- "serde_json",
- "steam_shortcuts_util",
- "steamgriddb_api",
  "tokio",
  "toml",
  "uplay",
