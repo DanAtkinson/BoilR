@@ -12,3 +12,6 @@ members=[
     "ui"
 ]
 default-members=["cli"]
+
+[profile.release]
+incremental = true

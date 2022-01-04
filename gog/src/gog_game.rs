@@ -53,7 +53,7 @@ impl From<GogShortcut> for ShortcutOwned {
             "",
             "",
         );
-        
+
         let mut owned_shortcut = shortcut.to_owned();
         owned_shortcut.tags.push("Gog".to_owned());
         owned_shortcut.tags.push("Ready TO Play".to_owned());

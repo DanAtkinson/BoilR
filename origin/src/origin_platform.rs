@@ -1,6 +1,6 @@
-use platform::{Platform, SettingsValidity};
 use failure::*;
 use nom::bytes::complete::take_until;
+use platform::{Platform, SettingsValidity};
 use std::{
     fs::DirEntry,
     path::{Path, PathBuf},

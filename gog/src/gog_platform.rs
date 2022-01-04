@@ -1,7 +1,7 @@
 use failure::*;
 use std::path::{Path, PathBuf};
 
-use crate::{gog_config::GogConfig};
+use crate::gog_config::GogConfig;
 use platform::Platform;
 
 use super::{

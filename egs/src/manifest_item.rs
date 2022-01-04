@@ -138,6 +138,7 @@ mod tests {
         assert_eq!(shortcut.exe, manifest.get_launch_url());
         assert_eq!(shortcut.launch_options, "");
     }
+
     #[test]
     fn generates_shortcut_not_managed() {
         let json = include_str!("example_item.json");

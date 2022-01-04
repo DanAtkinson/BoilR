@@ -1,12 +1,9 @@
-use crate::{
-     steam::SteamSettings,
-    steamgriddb::SteamGridDbSettings,
-};
-use origin::OriginSettings;
-use legendary::LegendarySettings;
+use crate::{steam::SteamSettings, steamgriddb::SteamGridDbSettings};
 use egs::EpicGamesLauncherSettings;
 use gog::GogSettings;
 use itch::ItchSettings;
+use legendary::LegendarySettings;
+use origin::OriginSettings;
 use uplay::UplaySettings;
 
 use config::{Config, ConfigError, Environment, File};

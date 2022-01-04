@@ -1,18 +1,18 @@
-use egs::EpicPlatform;
-use legendary::LegendaryPlatform;
-use crate::{        
+use crate::{
     settings::Settings,
     steam::{get_shortcuts_for_user, get_shortcuts_paths, ShortcutInfo, SteamUsersInfo},
     steamgriddb::download_images_for_users,
 };
-use uplay::Uplay;
-use platform::Platform;
-use std::error::Error;
-use steam_shortcuts_util::{shortcut::ShortcutOwned, shortcuts_to_bytes};
+use egs::EpicPlatform;
 use gog::GogPlatform;
 use itch::ItchPlatform;
+use legendary::LegendaryPlatform;
 use origin::OriginPlatform;
+use platform::Platform;
+use std::error::Error;
 use std::{fs::File, io::Write, path::Path};
+use steam_shortcuts_util::{shortcut::ShortcutOwned, shortcuts_to_bytes};
+use uplay::Uplay;
 
 const BOILR_TAG: &str = "boilr";
 

@@ -1,9 +1,9 @@
 use super::butler_db_parser::*;
 use super::receipt::Receipt;
 use super::{ItchGame, ItchSettings};
-use platform::{Platform, SettingsValidity};
 use failure::*;
 use flate2::read::GzDecoder;
+use platform::{Platform, SettingsValidity};
 use std::collections::HashSet;
 use std::io::prelude::*;
 use std::path::Path;
