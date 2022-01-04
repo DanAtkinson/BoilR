@@ -1,5 +1,5 @@
 [package]
-name = "boilr"
+name = "main"
 version = "0.2.7"
 edition = "2021"
 
