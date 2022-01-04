@@ -8,5 +8,6 @@ members=[
     "itch",
     "legendary",
     "uplay",
-    "cli"
+    "cli",
+    "ui"
 ]
